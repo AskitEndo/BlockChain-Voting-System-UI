@@ -1,20 +1,16 @@
-// routes/electionRoutes.js
 const express = require("express");
 const router = express.Router();
 const {
+  getAllElections,
   createElection,
-  getElections,
 } = require("../controllers/electionController");
+const authMiddleware = require("../middleware/authMiddleware");
 const adminMiddleware = require("../middleware/adminMiddleware");
 
-// @desc Create new election
-// @route POST /api/elections
-// @access Admin
-router.post("/", adminMiddleware, createElection);
+// Public route
+router.get("/", getAllElections);
 
-// @desc Get all elections
-// @route GET /api/elections
-// @access Public
-router.get("/", getElections);
+// Admin-only route
+router.post("/create", authMiddleware, adminMiddleware, createElection);
 
 module.exports = router;

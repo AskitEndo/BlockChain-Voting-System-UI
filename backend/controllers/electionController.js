@@ -1,17 +1,41 @@
-// controllers/electionController.js
 const Election = require("../models/Election");
-const adminMiddleware = require("../middleware/adminMiddleware");
 
-// Create new election
-exports.createElection = async (req, res) => {
-  const { name, candidates, closingDate } = req.body;
-  const election = new Election({ name, candidates, closingDate });
-  await election.save();
-  res.status(201).json(election);
+const getAllElections = async (req, res) => {
+  try {
+    const elections = await Election.find();
+    res.status(200).json(elections);
+  } catch (err) {
+    console.error("Error fetching elections:", err.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
-// Get all elections
-exports.getElections = async (req, res) => {
-  const elections = await Election.find();
-  res.status(200).json(elections);
+const createElection = async (req, res) => {
+  try {
+    const { name, closingDate, candidates } = req.body;
+
+    // Validate input
+    if (!name || !closingDate) {
+      return res
+        .status(400)
+        .json({ message: "Name and closing date are required." });
+    }
+
+    const newElection = new Election({
+      name,
+      closingDate,
+      candidates,
+    });
+
+    await newElection.save();
+    res.status(201).json(newElection);
+  } catch (err) {
+    console.error("Error creating election:", err.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = {
+  getAllElections,
+  createElection,
 };
