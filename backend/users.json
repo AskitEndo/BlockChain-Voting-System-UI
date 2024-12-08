@@ -1,0 +1,167 @@
+[
+  {
+    "id": "admin",
+    "password": "admin",
+    "role": "admin"
+  },
+  {
+    "id": "adit01",
+    "password": "1bo22ic001",
+    "role": "user"
+  },
+  {
+    "id": "adit02",
+    "password": "1bo22ic002",
+    "role": "user"
+  },
+  {
+    "id": "aksh03",
+    "password": "1bo22ic003",
+    "role": "user"
+  },
+  {
+    "id": "anki04",
+    "password": "1bo22ic004",
+    "role": "user"
+  },
+  {
+    "id": "chai05",
+    "password": "1bo22ic005",
+    "role": "user"
+  },
+  {
+    "id": "chan06",
+    "password": "1bo22ic006",
+    "role": "user"
+  },
+  {
+    "id": "char07",
+    "password": "1bo22ic007",
+    "role": "user"
+  },
+  {
+    "id": "char08",
+    "password": "1bo22ic008",
+    "role": "user"
+  },
+  {
+    "id": "chin09",
+    "password": "1bo22ic009",
+    "role": "user"
+  },
+  {
+    "id": "deek10",
+    "password": "1bo22ic010",
+    "role": "user"
+  },
+  {
+    "id": "dhar11",
+    "password": "1bo22ic011",
+    "role": "user"
+  },
+  {
+    "id": "divy12",
+    "password": "1bo22ic012",
+    "role": "user"
+  },
+  {
+    "id": "gbni13",
+    "password": "1bo22ic013",
+    "role": "user"
+  },
+  {
+    "id": "gour14",
+    "password": "1bo22ic014",
+    "role": "user"
+  },
+  {
+    "id": "jont15",
+    "password": "1bo22ic015",
+    "role": "user"
+  },
+  {
+    "id": "lali16",
+    "password": "1bo22ic016",
+    "role": "user"
+  },
+  {
+    "id": "madh17",
+    "password": "1bo22ic017",
+    "role": "user"
+  },
+  {
+    "id": "mdsu18",
+    "password": "1bo22ic018",
+    "role": "user"
+  },
+  {
+    "id": "mhmd19",
+    "password": "1bo22ic019",
+    "role": "user"
+  },
+  {
+    "id": "mhmd20",
+    "password": "1bo22ic020",
+    "role": "user"
+  },
+  {
+    "id": "saha21",
+    "password": "1bo22ic021",
+    "role": "user"
+  },
+  {
+    "id": "nanc22",
+    "password": "1bo22ic022",
+    "role": "user"
+  },
+  {
+    "id": "noor23",
+    "password": "1bo22ic023",
+    "role": "user"
+  },
+  {
+    "id": "pann24",
+    "password": "1bo22ic024",
+    "role": "user"
+  },
+  {
+    "id": "poor25",
+    "password": "1bo22ic025",
+    "role": "user"
+  },
+  {
+    "id": "rahu26",
+    "password": "1bo22ic026",
+    "role": "user"
+  },
+  {
+    "id": "ruku27",
+    "password": "1bo22ic027",
+    "role": "user"
+  },
+  {
+    "id": "shre28",
+    "password": "1bo22ic028",
+    "role": "user"
+  },
+  {
+    "id": "suha29",
+    "password": "1bo22ic029",
+    "role": "user"
+  },
+  {
+    "id": "viny30",
+    "password": "1bo22ic030",
+    "role": "user"
+  },
+  {
+    "id": "yaqo31",
+    "password": "1bo22ic031",
+    "role": "user"
+  },
+  {
+    "id": "yuke32",
+    "password": "1bo22ic032",
+    "role": "user"
+  }
+]
