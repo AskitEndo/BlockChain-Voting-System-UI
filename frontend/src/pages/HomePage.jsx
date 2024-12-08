@@ -41,7 +41,7 @@ function HomePage() {
 
         <div className="w-full p-8 md:w-1/2">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900">Welcome Back!</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Welcome to the<br/>Blockchain Voting System !</h2>
             <p className="mt-2 text-sm text-gray-600">Please sign in to continue</p>
           </div>
 

@@ -16,16 +16,7 @@ function Navbar() {
           </Link>
           
           <div className="flex space-x-4">
-            <Link
-              to="/"
-              className={`px-3 py-2 rounded-md ${
-                isActive('/') 
-                  ? 'bg-blue-500 text-white' 
-                  : 'text-gray-600 hover:bg-blue-100'
-              }`}
-            >
-              Home
-            </Link>
+            
             
             {isAuthenticated ? (
               <>
@@ -40,7 +31,10 @@ function Navbar() {
                   Dashboard
                 </Link>
                 <button
-                  onClick={logout}
+                  onClick={() => {
+                    logout();
+                    window.location.href = '/';
+                  }}
                   className="px-3 py-2 text-gray-600 hover:bg-blue-100 rounded-md"
                 >
                   Logout

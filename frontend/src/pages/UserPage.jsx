@@ -1,93 +1,181 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import Chart from '../components/Chart';
 
-function UserPage() {
+export default function UserPage() {
   const { userRole } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Redirect to home if user is not authenticated or is admin
     if (!userRole || userRole === 'admin') {
       navigate('/');
     }
   }, [userRole, navigate]);
 
-  // If not user, don't render the content
   if (!userRole || userRole === 'admin') {
     return null;
   }
 
-  const [activeElections, setActiveElections] = useState([
+  const [currentElections] = useState([
     {
       id: 1,
-      title: 'Student Council Election',
-      candidates: ['John Doe', 'Jane Smith', 'Bob Johnson'],
-      hasVoted: false,
+      title: 'Student Council Election 2024',
+      status: 'Active',
+      totalVotes: 145,
+      endDate: '2024-03-25',
+      hasVoted: false
     },
     {
       id: 2,
-      title: 'Class Representative',
-      candidates: ['Alice Brown', 'Charlie Davis'],
-      hasVoted: true,
+      title: 'Class Representative Election',
+      status: 'Active',
+      totalVotes: 89,
+      endDate: '2024-03-20',
+      hasVoted: true
+    },
+    {
+      id: 3,
+      title: 'Department Head Election',
+      status: 'Pending',
+      totalVotes: 0,
+      endDate: '2024-04-01',
+      hasVoted: false
     },
   ]);
 
-  const handleVote = (electionId, candidateIndex) => {
-    // TODO: Integrate with backend
-    console.log(`Voted for candidate ${candidateIndex} in election ${electionId}`);
+  const [completedElections] = useState([
+    {
+      id: 101,
+      title: 'Student Council Election 2023',
+      completedDate: 'December 2023',
+      totalVotes: 256,
+      winner: 'John Smith',
+    },
+    {
+      id: 102,
+      title: 'Sports Committee Election',
+      completedDate: 'November 2023',
+      totalVotes: 189,
+      winner: 'Sarah Johnson',
+    },
+    {
+      id: 103,
+      title: 'Cultural Committee Election',
+      completedDate: 'October 2023',
+      totalVotes: 210,
+      winner: 'Mike Brown',
+    },
+  ]);
+
+  const handleElectionClick = (election) => {
+    console.log('Clicked election:', election);
+    try {
+      setTimeout(() => {
+        navigate(`/election/${election.id}`);
+        console.log('Navigation attempted with delay');
+      }, 100);
+    } catch (error) {
+      console.error('Navigation error:', error);
+    }
   };
 
-  // Mock data for completed election results
-  const completedElectionData = {
-    labels: ['Candidate A', 'Candidate B', 'Candidate C'],
-    datasets: [{
-      label: 'Votes',
-      data: [15, 12, 8],
-      backgroundColor: [
-        'rgba(54, 162, 235, 0.5)',
-        'rgba(255, 99, 132, 0.5)',
-        'rgba(75, 192, 192, 0.5)',
-      ],
-    }],
+  const handleResultClick = (electionId) => {
+    navigate(`/election-result/${electionId}`);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
   };
 
   return (
-    <div className="space-y-8">
-      <section className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-2xl font-bold mb-4">Active Elections</h2>
-        <div className="space-y-6">
-          {activeElections.map((election) => (
-            <div key={election.id} className="border p-4 rounded-md">
-              <h3 className="text-xl font-semibold mb-2">{election.title}</h3>
-              {!election.hasVoted ? (
-                <div className="space-y-2">
-                  {election.candidates.map((candidate, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleVote(election.id, index)}
-                      className="w-full text-left p-2 rounded-md hover:bg-blue-50 
-                               border border-gray-200 transition duration-150"
-                    >
-                      {candidate}
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-green-500">You have already voted in this election</p>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">User Dashboard</h1>
+        
+      </div>
 
-      <section className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-2xl font-bold mb-4">Completed Elections</h2>
-        <Chart data={completedElectionData} title="Previous Election Results" />
-      </section>
+      <div className="flex gap-8">
+        <section className="bg-white p-6 rounded-lg shadow-lg flex-1">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900">Current Elections</h2>
+          <div className="space-y-4">
+            {currentElections.map((election) => (
+              <button
+                key={election.id}
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log('Button clicked for election:', election.title);
+                  handleElectionClick(election);
+                }}
+                disabled={election.status !== 'Active'}
+                className={`w-full text-left border border-gray-200 p-4 rounded-md transition-colors ${
+                  election.status === 'Active' 
+                    ? 'hover:bg-gray-50 cursor-pointer'
+                    : 'opacity-75 cursor-not-allowed bg-gray-50'
+                }`}
+              >
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className="font-semibold text-gray-800">{election.title}</h3>
+                    <div className="flex gap-4 mt-1">
+                      <span className="text-sm text-gray-600">
+                        Total Votes: {election.totalVotes}
+                      </span>
+                      <span className="text-sm text-gray-600">
+                        Ends: {election.endDate}
+                      </span>
+                      <span className={`text-sm ${
+                        election.status === 'Active' 
+                          ? 'text-green-600'
+                          : 'text-gray-600'
+                      }`}>
+                        Status: {election.status}
+                      </span>
+                    </div>
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-sm ${
+                    election.hasVoted 
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-yellow-100 text-yellow-800'
+                  }`}>
+                    {election.hasVoted ? 'Voted' : 'Not Voted'}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <div className="w-px bg-gray-200 self-stretch"></div>
+
+        <section className="bg-white p-6 rounded-lg shadow-lg flex-1">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900">Election Results</h2>
+          <div className="space-y-4">
+            {completedElections.map((election) => (
+              <button
+                key={election.id}
+                onClick={() => handleResultClick(election.id)}
+                className="w-full text-left border border-gray-200 p-4 rounded-md hover:bg-gray-50 transition-colors"
+              >
+                <div>
+                  <h3 className="font-semibold text-gray-800">{election.title}</h3>
+                  <div className="flex gap-4 mt-1">
+                    <span className="text-sm text-gray-600">
+                      {election.completedDate}
+                    </span>
+                    <span className="text-sm text-gray-600">
+                      Total Votes: {election.totalVotes}
+                    </span>
+                  </div>
+                  <div className="mt-1 text-sm text-gray-600">
+                    Winner: {election.winner}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
-
-export default UserPage; 
