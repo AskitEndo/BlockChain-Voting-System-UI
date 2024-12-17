@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}
+
+/* Hide scrollbar for cleaner look but keep functionality */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+}
+
+/* Rest of your existing styles */
+@layer components {
+  .glass-card {
+    @apply bg-white/30 backdrop-blur-md border border-white/30 shadow-lg;
+  }
+
+  .glass-button {
+    @apply bg-white/20 backdrop-blur-sm border border-white/30 
+           hover:bg-white/30 transition-all duration-300 
+           hover:shadow-lg hover:scale-105;
+  }
+
+  .input-field {
+    @apply bg-white/10 backdrop-blur-sm border border-white/30 
+           focus:border-primary-400 focus:ring-2 focus:ring-primary-400/50
+           text-gray-800 placeholder-gray-500;
+  }
+}
+
+/* Custom Animations */
+.animate-enter {
+  animation: slideUp 0.5s ease-out;
+}
+
+/* Glassmorphism Card Hover Effect */
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Loading Animation */
+.loading-dots:after {
+  content: ".";
+  animation: dots 1.5s steps(5, end) infinite;
+}
+
+@keyframes dots {
+  0%,
+  20% {
+    content: ".";
+  }
+  40% {
+    content: "..";
+  }
+  60% {
+    content: "...";
+  }
+  80%,
+  100% {
+    content: "";
+  }
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 102, 241, 0.3) rgba(255, 255, 255, 0.1);
+}
